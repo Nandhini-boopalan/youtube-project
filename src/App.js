@@ -9,6 +9,7 @@ import Maincontainer from './components/maincontainer';
 import WatchPage from './components/watchpage';
 
 
+
 const appRouter=createBrowserRouter([
   {
     path:"/",
@@ -22,7 +23,7 @@ const appRouter=createBrowserRouter([
           path:"/watch",
           element:<WatchPage/>,
            },
-     
+           
 
     ]
   }

@@ -3,10 +3,11 @@ import AppSlice from "./AppSlice";
 import searchslice from "./searchslice";
 
 
+
 const Store=configureStore({
     reducer:{
         app:AppSlice ,
-        search:searchslice
+      search:searchslice
     }
 
 })

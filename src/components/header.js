@@ -1,27 +1,22 @@
 import { useEffect, useState } from "react"
 import { toggleMenu } from "../utelis/AppSlice"
 import {HAM_MENU, ICON, USER} from "./constants"
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import { U_TUBE_SEARCH_API } from "./constants"
-import { cacheResults } from "../utelis/searchslice"
+
 
 const Header=()=>{
     const [searchQuery,setSearchQuery]=useState(" ")
     const [suggestion,setsuggestion]=useState([])
     const [showsuggestion,setShowSuggestion]=useState(false)
 
-    const searchCache=useSelector((store)=>store.search)
+    
     const dispatch=useDispatch()
     
     useEffect(()=>{
-console.log(searchQuery)
-const timer=setTimeout(()=>{
-    if(searchCache[searchQuery]){
-        setsuggestion(searchCache[searchQuery])
-    }else{
-        getsearchSuggestion()
-    }
-   },200)
+//console.log(searchQuery)
+const timer=setTimeout(()=>
+    getsearchSuggestion(),200)
     return ()=>{
         clearTimeout(timer)
     }
@@ -36,8 +31,7 @@ const getsearchSuggestion=async ()=>{
    // console.log(json)
    setsuggestion(json[1])
 
-   dispatch(cacheResults)
-
+    
 }
    
     const toggleMenuHandler=()=>{
@@ -60,17 +54,20 @@ value={searchQuery}
  onFocus={()=>setShowSuggestion(true)}
  onBlur={()=>setShowSuggestion(false)}
  />
-<button className=" h-6 pr-1  border border-black rounded-r-full bg-gray-100 px-2 ">search</button>
+<button className=" h-6 pr-1  border border-black rounded-r-full bg-gray-100 px-2  ">search</button>
 </div>
-{showsuggestion&&(<div className="fixed bg-white w-60 py-2 px-5  shadow-lg border border-gray-100">
+<div className="px-36 rounded-md">
+{showsuggestion&&(<div className="fixed bg-white w-60 py-2 px-2  shadow-lg border border-gray-100  rounded-xl">
     <ul>
-        {suggestion.map((s)=><li  key={s}className=" py-2shadow-sm hover:bg-gray-100">{s}</li>)}
+        {suggestion.map((s)=><li  key={s}className=" py-2 shadow-sm hover:bg-gray-100">{s}</li>)}
          
 
     </ul>
 
 
 </div>)}
+</div>
+
 
 </div>
 <div className="col-span-1">

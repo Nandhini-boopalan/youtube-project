@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react"
 import { U_TUBE_VIDEO_API } from "./constants"
-import Videocard from "./videocard"
+import Videosidebarcard from "./videosidebarcard"
 import { Link } from "react-router-dom"
+import { useEffect ,useState} from "react"
 
-
-
-const Videocontainer=()=>{
+const Videosidebar=()=>{
     const [videos,setvideos]=useState([])
     useEffect(()=>{
 getVideos()
@@ -17,14 +15,14 @@ getVideos()
         setvideos(json.items)
     }
     return(
-        <div  className="flex flex-wrap">
+        <div>
+            videos
             {videos.map((video)=>(
            <Link key={video.id} to={"watch?v="+video.id}> 
-            <Videocard  info={video}/>
+            <Videosidebarcard  info={video}/>
             </Link>
               ))}
-          
         </div>
     )
 }
-export default Videocontainer
+export default Videosidebar
